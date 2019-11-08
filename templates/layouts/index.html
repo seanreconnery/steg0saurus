@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="steganography web app utilizing Python, Flask, and Stegano">
+  <meta name="author" content="">
+
+  <title>
+    Steg0saurus // steganographic encoding & decoding
+  </title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="/static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/static/css/stylish-portfolio.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper" style="background: #717171;">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Steg0saurus Chex</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">About</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#hide">Embed</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#reveal">Scan</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#examples">Examples</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex align-items-baseline">
+    <div class="container text-center my-auto align-items-baseline">
+
+    <div class="col-md-12">
+        <font color="white">
+        </font>
+    </div>
+
+
+    </div>
+    <div class="overlay">
+
+
+    </div>
+  </header>
+
+
+  {% block content %}
+  {% endblock %}
+
+
+  <!-- STEGANO -- EMBED DATA IN IMAGE -->
+  <section class="content-section bg-light" id="hide">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h1><b>Stegano:</b></h1>
+          <h2><em>hide some dino data!</em></h2>
+          <h4 class="lighter" style="color: #7f7f7f;">Select an image and enter some data to hide inside</h4>
+          <p class="lead mb-5">
+              	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+          </p>
+          <form method="post" action="/stegano/hide" enctype="multipart/form-data">
+            <dl>
+		        <p>
+			        <input type="file" name="file" autocomplete="off" required>
+		        </p>
+                <p>
+                Message To Hide:  <input type="text" name="txtmsg" maxlength="300" required>
+                </p>
+            </dl>
+            <p>
+		    <input type="submit" value="Embed Data" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- JSTEG -- EMBED DATA IN IMAGE -->
+  <section class="content-section bg-white" id="jsteghide">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h1><b>JSteg:</b></h1>
+          <h2><em>Bury some dino data!</em></h2>
+          <h4 class="lighter" style="color: #7f7f7f;">Select a cover image</h4>
+          <p class="lead mb-5">
+              	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+          </p>
+          <form method="post" action="/jsteg/hide" enctype="multipart/form-data">
+            <dl>
+		        <p>Cover Image:  <input type="file" name="file" autocomplete="off" required>
+		        </p>
+                <p>
+                File To Hide:  <input type="file" name="jshide" autocomplete="off" required>
+                </p>
+            </dl>
+            <p>
+		    <input type="submit" value="Embed Data" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- OUTGUESS -- EMBED DATA IN IMAGE -->
+  <section class="content-section bg-light" id="hide">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h1><b>OutGuess:</b></h1>
+          <h2><em>Bury some dino data!</em></h2>
+          <h4 class="lighter" style="color: #7f7f7f;">Select a cover image</h4>
+          <p class="lead mb-5">
+              	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+          </p>
+          <form method="post" action="/outguess/hide" enctype="multipart/form-data">
+            <dl>
+		        <p>Cover Image:  <input type="file" name="ofile" autocomplete="off" required>
+		        </p>
+                <p>
+                File To Hide:  <input type="file" name="hidefile" autocomplete="off" required>
+                </p>
+                <p>
+                Unlock Key:  <input type="text" name="passw" autocomplete="off" required>
+                </p>
+
+            </dl>
+            <p>
+		    <input type="submit" value="Submit" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- SEPARATOR SECTION -->
+ <section class="content-section bg-white" id="reveal">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+            <img src="/static/img/stego-logo.png" border="0">
+            <br>
+            <h1><em>Dig up</em> some data!</h1>
+            <h4><em>Scan for various forms of steganography</em></h4>
+        </div>
+      </div>
+    </div>
+ </section>
+
+  <!-- STEGDETECT -- REVEAL DATA IN IMAGE -->
+  <section class="content-section bg-white" id="stegdetect">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+          <h1><b>StegDetect:</h1>
+          <h4 style="color: #7f7f7f;">Select an image to scan with StegDetect</h4>
+          <p class="lead mb-5">
+             	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+	            StegDetect can check for JSteg, Outguess, JPHide, Invisible Secrets, F5 Stego, and Appended data
+          </p>
+          <form method="post" action="/stegdetect" enctype="multipart/form-data">
+            <dl>
+		        <p>
+			        <input type="file" name="stegdet" autocomplete="off" required>
+		        </p>
+            </dl>
+            <p>
+		        <input type="submit" value="Scan Image" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- OUTGUESS SCAN -->
+
+  <!-- OUTGUESS -- REVEAL DATA IN IMAGE -->
+  <section class="content-section bg-light" id="outguessscan">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h1><b>OutGuess:</h1>
+          <h4 class="lighter" style="color: #7f7f7f;">Select an image to check</h4>
+          <p class="lead mb-5">
+              	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+
+	            <b>Version: </b> Outguess-0.13 <em>and</em> Outguess-0.2
+          </p>
+          <form method="post" action="/outguess/scan" enctype="multipart/form-data">
+            <dl>
+		        <p>
+			        Image to scan:  <input type="file" name="outgfile" autocomplete="off" required>
+		        </p>
+                <p>
+                    Unlock Key:  <input type="text" name="passwd" autocomplete="off">
+                </p>
+            </dl>
+            <p>
+		    <input type="submit" value="Scan" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- STEGANO -- REVEAL DATA IN IMAGE -->
+  <section class="content-section bg-white" id="steganoscan">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+
+          <h1><b>Stegano:</b></h1>
+          <h4 style="color: #7f7f7f;">Select an image to check for embedded data</h4>
+          <p class="lead mb-5">
+             	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+	            <em>LSB Steganography on RGB PNG/Bitmap images</em>
+          </p>
+          <form method="post" action="/stegano/scan" enctype="multipart/form-data">
+            <dl>
+		        <p>
+			        <input type="file" name="digfile" autocomplete="off" required>
+		        </p>
+            </dl>
+            <p>
+		        <input type="submit" value="Scan Image" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- JSTEG -- REVEAL DATA IN IMAGE -->
+  <section class="content-section bg-light" id="jstegscan">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h1><b>JSteg:</h1>
+          <h4 class="lighter" style="color: #7f7f7f;">Select an image to check</h4>
+          <p class="lead mb-5">
+              	{% with messages = get_flashed_messages() %}
+	            {% if messages %}
+		        <ul class=flashes>
+		        {% for message in messages %}
+		        <li>{{ message }}</li>
+		        {% endfor %}
+		        </ul>
+	            {% endif %}
+	            {% endwith %}
+
+	            LSB Steganography in JPEG images with non-progressive decoding
+          </p>
+          <form method="post" action="/jsteg/scan" enctype="multipart/form-data">
+            <dl>
+		        <p>
+			        <input type="file" name="jsteg" autocomplete="off" required>
+		        </p>
+
+            </dl>
+            <p>
+		    <input type="submit" value="Scan" class="btn btn-dark btn-xl js-scroll-trigger">
+	        </p>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ABOUT SECTION -->
+  <section class="content-section bg-light" id="about">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2><b>About</h2>
+          <h4 class="lighter">Steg0saurus Chex</h4>
+          <p class="lead mb-5">
+          I created <b><em>Steg0saurus Chex</em></b> after doing a bunch of <em>ARG Puzzle Solving</em>.  Things like the Cicada 3301 puzzles and others lead me down the path of steganography and the tools associated.
+            However, after a while, I became a go-to person when it came to some of these ARG communities and truth seekers due to stumbling on what appears to be James Comey using steganography to covertly communicate on his twitter account as well as a possible embedded PGP encryption key inside a Jeffrey Epstein image from the NYPost.
+            <br>After that, it was pretty much a daily routine of people asking me if I've checked (or <em>can</em> I check) some specific image that they find fishy.  For that reason, I wanted to provide easy access to the same tools I use and significantly reduce the barrier of entry.  So... here they are!
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ABOUT -- What Is Stego -- SECTION -->
+  <section class="content-section bg-white" id="whatsstego">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h2>About</h2>
+          <h3><b>What is STEGANOGRAPHY?</h3>
+          <h4 class="lighter">No, it's not a dinosaur type..</h4>
+          <p class="lead mb-5">
+          <b><em>Steganography</em></b> is an ancient word that translate to something along the lines of "hidden writing".  It is simply the act of hiding something in plain sight.  The technique is as old as time and the processes are numerous.
+            In the digital age, <b>steganography</b> is generally referred to in regards to image or audio steganography--the act of embedding or hiding a secret message inside the data of an image or soundfile.  In the grand scheme of things, data is just data--whether that data represents a song or a picture, it's still (at its absolute core) a bunch of 1s and 0s.
+
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ABOUT -- Who Uses Stego -- SECTION -->
+  <section class="content-section bg-light" id="whostego">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2><b>About</h2>
+          <h4 class="lighter">How Does Steganography Work?</h4>
+          <p class="lead mb-5">
+          There are numerous methods to conceal data inside an image, but the technique utilized here is referred to as LSB, or Least Significant Bit.  In every <b>byte</b> of data, there are <b>8 bits</b>.
+            These <b>bits</b> hold information about the image--its color pallete, its size, etc.<br>
+            However, not all bits were created equal and sometimes there are redundant bits of data.<br>
+            <b>The LSB</b> technique for streganographically hiding information will utilize these least significant bits that contain redudnant data.  <em>This is where our secret message will be hidden.</em>
+            <br>
+            <br>
+            The program goes thru the image, finds the spots it can store extra data, and then bit by bit, it creates a <b><em>new image</em></b> that looks virtually identical to the original, except it contains additional information in the form of the hidden message.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLES IMAGES with various steganographic embeddings -->
+  <section class="content-section bg-white" id="whatsstego">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h2>Examples</h2>
+          <h3><b>Here are some embedded files to check out</h3>
+          <p>Some require a password which is functionality I'm still working on adding.. so hold tight until then</p>
+          <p class="lead mb-5">
+          <a href="/examples/image1.jpg" target="_blank">image1.jpg</a><br>
+          <a href="/examples/image2.jpg" target="_blank">image2.jpg</a><br>
+          <a href="/examples/image3.jpg" target="_blank">image3.jpg</a><br>
+          <a href="/examples/image4.jpg" target="_blank">image4.jpg</a><br>
+          <a href="/examples/image5.jpg" target="_blank">image5.jpg</a><br>
+
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer text-center" id="contact">
+    <div class="container">
+      <ul class="list-inline mb-5">
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="https://twitter.com/CheapSkateDates" target="_blank">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white mr-3" href="#">
+            <i class="icon-social-youtube"></i>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a class="social-link rounded-circle text-white" href="#">
+            <i class="icon-social-github"></i>
+          </a>
+        </li>
+      </ul>
+      <p class="text-muted small mb-0">Copyright &copy; Luke Slytalker 2019</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="/static/js/stylish-portfolio.min.js"></script>
+
+</body>
+
+</html>

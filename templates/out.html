@@ -1,0 +1,29 @@
+{% extends "layouts/embed.html" %}
+
+{% block content %}
+
+  <!-- REVEAL DATA IN IMAGE -->
+  <section class="content-section bg-light" id="revealed">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto text-primary">
+            <h2> {{ message }} </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- DISPLAY LOGO STUFF -->
+ <section class="content-section bg-white" id="logo">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+            <img src="/static/img/stego-logo.png" border="0">
+        </div>
+      </div>
+    </div>
+ </section>
+
+
+{% endblock %}
+
