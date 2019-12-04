@@ -24,7 +24,7 @@ app.config['EXAMPLES_FOLDER'] = EXAMPLES_FOLDER
 app.config['OUTGUESS_FOLDER'] = OUTGUESS_FOLDER
 app.config['CICADA_FOLDER'] = CICADA_FOLDER
 
-app.secret_key = "z9_178yujbrty5rtfgwervbu765ert566yt987yuhg323wer"
+app.secret_key = "YOUR_API_KEY_HERE"
 
 # function to check if the filetype is allowed to be uploaded as set above
 def allowed_file(filename):
